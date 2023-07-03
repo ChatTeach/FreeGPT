@@ -1,0 +1,7 @@
+.main-container {
+	display: flex;
+	padding: var(--section-gap);
+	height: 100vh;
+	justify-content: center;
+	box-sizing: border-box;
+}

@@ -1,0 +1,137 @@
+.conversation {
+	width: 60%;
+	margin: 0px 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.conversation #messages {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	overflow-wrap: break-word;
+	padding-bottom: 8px;
+}
+
+.conversation .user-input {
+	max-height: 180px;
+	margin: 16px 0px;
+}
+
+.conversation .user-input input {
+	font-size: 1rem;
+	background: none;
+	border: none;
+	outline: none;
+	color: var(--colour-3);
+}
+
+.conversation .user-input input::placeholder {
+	color: var(--user-input);
+}
+
+.conversation-title {
+	color: var(--colour-3);
+	font-size: 14px;
+}
+
+.conversation .user-input textarea {
+	font-size: 1rem;
+	width: 100%;
+	height: 100%;
+	padding: 12px;
+	background: none;
+	border: none;
+	outline: none;
+	color: var(--colour-3);
+	resize: vertical;
+	max-height: 150px;
+	min-height: 80px;
+}
+
+.box {
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	background-color: var(--blur-bg);
+	height: 100%;
+	width: 100%;
+	border-radius: var(--border-radius-1);
+	border: 1px solid var(--blur-border);
+}
+
+.input-box {
+	display: flex;
+	align-items: center;
+	padding: 8px;
+	cursor: pointer;
+}
+
+#cursor {
+	line-height: 17px;
+	margin-left: 3px;
+	-webkit-animation: blink 0.8s infinite;
+	animation: blink 0.8s infinite;
+	width: 7px;
+	height: 15px;
+}
+
+@keyframes blink {
+	0% {
+		background: #ffffff00;
+	}
+
+	50% {
+		background: white;
+	}
+
+	100% {
+		background: #ffffff00;
+	}
+}
+
+@-webkit-keyframes blink {
+	0% {
+		background: #ffffff00;
+	}
+
+	50% {
+		background: white;
+	}
+
+	100% {
+		background: #ffffff00;
+	}
+}
+
+/* scrollbar */
+.conversation #messages::-webkit-scrollbar {
+	width: 4px;
+	padding: 8px 0px;
+}
+
+.conversation #messages::-webkit-scrollbar-track {
+	background-color: #ffffff00;
+}
+
+.conversation #messages::-webkit-scrollbar-thumb {
+	background-color: #555555;
+	border-radius: 10px;
+}
+
+@media screen and (max-width: 990px) {
+	.conversation {
+		width: 100%;
+		height: 90%;
+	}
+}
+
+@media screen and (max-height: 720px) {
+	.conversation.box {
+		height: 70%;
+	}
+
+	.conversation .user-input textarea {
+		font-size: 0.875rem;
+	}
+}
