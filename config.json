@@ -4,5 +4,5 @@
 		"port": 1338,
 		"debug": false
 	},
-	"use_auto_proxy": false
+	"use_auto_proxy": true
 }
