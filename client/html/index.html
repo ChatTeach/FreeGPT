@@ -48,14 +48,6 @@
 						<i class="fa-regular fa-trash"></i>
 						<span>{{_('Clear Conversations')}}</span>
 					</button>
-					<div class="api-key-container" id="api-key-container">
-						<button id="show-api-key-button" class="button">
-							<i class="fa-regular fa-key"></i> 
-							<span>{{_('API Key')}}</span>
-						</button>
-						<input type="password" id="API-key" class="hidden fade-in" />
-						<button id="api-key-ok-button" class="button hidden fade-in">{{_('Ok')}}</button>
-					</div>
 					<div class="settings-container">
 						<div class="checkbox field">
 							<span>{{_('Dark Mode')}}</span>
@@ -70,16 +62,9 @@
 								onchange="changeLanguage(this.value)"></select>
 						</div>
 					</div>
-					<a
-						class="info"
-						href="https://github.com/ramonvc/freegpt-webui/tree/chimeragpt-version"
-						target="_blank">
+					<a class="info" href="https://github.com/ChatTeach/FreeGPT" target="_blank">
 						<i class="fa-brands fa-github"></i>
-						<span class="conversation-title">freegpt-webui-chimera</span>
-					</a>
-					<a class="info" href="https://discord.gg/hfmwJzctC6" target="_blank">
-						<i class="fa-brands fa-discord"></i>
-						<span class="conversation-title">ChimeraGPT</span>
+						<span class="conversation-title"> {{_('Version')}}: 0.1.0 </span>
 					</a>
 				</div>
 			</div>
@@ -108,25 +93,9 @@
 						<div class="buttons">
 							<div class="field">
 								<select class="dropdown" name="model" id="model">
-									<optgroup label="GPT">
-										<option value="gpt-3.5-turbo">GPT-3.5-turbo</option>
-										<option value="gpt-3.5-turbo-0301">GPT-3.5-turbo-0301</option>
-										<option value="gpt-3.5-turbo-16k">GPT-3.5-turbo-16k</option>
-										<option value="gpt-4">GPT-4</option>
-										<option value="gpt-4-0314">GPT-4-0314</option>
-										<option value="gpt-4-32k">GPT-4-32k</option>
-									</optgroup>
-									<optgroup label="LLAMA">
-										<option value="oasst-sft-6-llama-30b">LLaMa-30B-sft-6</option>
-										<option value="llama-2-70b-chat">LLaMa-2-70B-chat</option>
-									</optgroup>
-									<optgroup label="CLAUDE">
-										<option value="claude-instant">Claude-instant</option>
-										<option value="claude-2">Claude-2</option>
-									</optgroup>
-									<optgroup label="{{_('IMAGE')}}">
-										<option value="" disabled>Kandinsky (soon)</option>
-									</optgroup>
+									<option value="gpt-3.5-turbo" selected>GPT-3.5</option>
+									<option value="gpt-3.5-turbo-16k">GPT-3.5-turbo-16k</option>
+									<option value="gpt-4">GPT-4</option>
 								</select>
 							</div>
 							<div class="field">
@@ -154,7 +123,6 @@
 		<script>
 			window.conversation_id = "{{ chat_id }}";
 		</script>
-		<script src="{{ url_for('bp.static', filename='js/api-key.js') }}"></script>
 		<script src="{{ url_for('bp.static', filename='js/icons.js') }}"></script>
 		<script src="{{ url_for('bp.static', filename='js/chat.js') }}" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/markdown-it@latest/dist/markdown-it.min.js"></script>
