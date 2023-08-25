@@ -1,42 +1,48 @@
-from server.app import app
+import secrets
+
+from server.bp import bp
 from server.website import Website
 from server.backend import Backend_Api
+from server.babel import create_babel
 from json import load
-from gevent import pywsgi
-import socket
+from flask import Flask
 
 if __name__ == '__main__':
 
     # Load configuration from config.json
     config = load(open('config.json', 'r'))
     site_config = config['site_config']
+    url_prefix = config.pop('url_prefix')
+
+    # Create the app
+    app = Flask(__name__)
+    app.secret_key = secrets.token_hex(16)
+
+    # Set up Babel
+    create_babel(app)
 
     # Set up the website routes
-    site = Website(app)
+    site = Website(bp, url_prefix)
     for route in site.routes:
-        app.add_url_rule(
+        bp.add_url_rule(
             route,
             view_func=site.routes[route]['function'],
             methods=site.routes[route]['methods'],
         )
 
     # Set up the backend API routes
-    backend_api = Backend_Api(app, config)
+    backend_api = Backend_Api(bp, config)
     for route in backend_api.routes:
-        app.add_url_rule(
+        bp.add_url_rule(
             route,
             view_func=backend_api.routes[route]['function'],
             methods=backend_api.routes[route]['methods'],
         )
 
-    hostname = socket.gethostname()
-    ip_address = socket.gethostbyname(hostname)
+    # Register the blueprint
+    app.register_blueprint(bp, url_prefix=url_prefix)
 
-    # Run the Flask server by WSGI
-    print(f"Running on http://127.0.0.1:{site_config['port']}")
-    print(f"Running on http://{ip_address}:{site_config['port']}")
-    
-    server = pywsgi.WSGIServer(('0.0.0.0', site_config['port']), app)
-    server.serve_forever()
-    
-    print(f"Closing {ip_address}:{site_config['port']}")
+    # Run the Flask server
+    print(f"Running on {site_config['port']}{url_prefix}")
+    app.run(**site_config)
+    print(f"Closing port {site_config['port']}")
